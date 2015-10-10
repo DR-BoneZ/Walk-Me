@@ -15,6 +15,8 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\ORM\TableRegistry;
+use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 
@@ -35,7 +37,18 @@ class MapsController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When the view file could not
      *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
      */
+    public function beforeFilter(Event $event) {
+        $this->Auth->allow('nearby');
+    }
     public function index()
     {
+    }
+
+    public function nearby() {
+        $walkers = TableRegistry::get('Walkers');
+        $lat = $this->request->data['latitude'];
+        $long = $this->request->data['longitude'];
+        $query = $walkers->find('all', ['conditions' => ['Walkers.lat >' => $lat - .0144, 'Walkers.lat <' => $lat + .0144, 'Walkers.lng >' => $long - .0288, 'Walkers.lng <' => $long + .0288]]);
+        $this->set('json', json_encode($query));
     }
 }
