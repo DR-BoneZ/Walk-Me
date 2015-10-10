@@ -13,7 +13,24 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 $this->layout = 'default';
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
-<a class="btn btn-primary" href="/WalkMe/users/login"></a>
+<?php if ($userId !== null): ?>
+<div class="vertical-center">
+	<div class="container-fluid full-btn">
+		<div class="container-fluid">
+    		<div class="col-sm-2 col-sm-offset-5">
+        		<a class="btn btn-primary full-btn" href="/WalkMe/users/login">Login</a>
+    		</div>
+		</div>
+		<br>
+		<div class="container-fluid">
+    		<div class="col-sm-2 col-sm-offset-5">
+				<a class="btn btn-primary full-btn" href="/WalkMe/users/add" style="full-btn">Register</a>
+			</div>
+		</div>
+	</div>
+</div>
+<?php else: ?>
+<meta http-equiv="refresh"
+   content="0; url=/WalkMe/maps">
+<?php endif; ?>
