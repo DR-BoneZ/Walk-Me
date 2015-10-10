@@ -16,9 +16,11 @@ $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
 		    function showPosition(map, position){
-			
 				map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
-				map.setZoom(14);
+				map.setZoom(15);
+				
+				var currentMarker = new H.map.Marker({lat:position.coords.latitude, lng:position.coords.longitude});
+				map.addObject(currentMarker);
 			}
 			var platform = new H.service.Platform({
 			app_id: 'qB42RwI8Kum9fXo2xpsJ',
@@ -26,6 +28,7 @@ $this->layout = 'maps';?>
 			useCIT: true,
 			useHTTPS: true
 			});
+			
 			var defaultLayers = platform.createDefaultLayers();
 			//Step 2: initialize a map  - not specificing a location will give a whole world view.
 			var map = new H.Map(document.getElementById('mapContainer'),
