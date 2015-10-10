@@ -14,7 +14,7 @@
  */
 $this->layout = 'default';
 ?>
-<?php if ($userId !== null): ?>
+<?php if (!$userId): ?>
 <div class="vertical-center">
 	<div class="container-fluid full-btn">
 		<div class="container-fluid">

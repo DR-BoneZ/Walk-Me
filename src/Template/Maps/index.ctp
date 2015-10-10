@@ -12,34 +12,7 @@
  * @since         0.10.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-$this->layout = null;?>
-<head>
-	<script src="http://js.api.here.com/se/2.5.4/jsl.js" type="text/javascript" charset="utf-8">
-	</script>
-	<style>
-		html {
-			overflow:hidden;
-		}
-
-		body {
-			margin: 0;
-			padding: 0;
-			position: absolute;
-			overflow:hidden;
-			width: 100%;
-			height: 100%;
-		}
-
-		#mapContainer {
-			width: 100%;
-			height: 100%;
-			left: 0;
-			top: 0;
-			position: absolute;
-		}
-	</style>
-</head>
-<body>
+$this->layout = 'maps';?>
 <div id="mapContainer" style="width:600;height:600">
 		<script type="text/javascript">
 			nokia.Settings.set("app_id", "qB42RwI8Kum9fXo2xpsJ");
@@ -54,4 +27,3 @@ $this->layout = null;?>
 		);
 	</script>
 </div>
-</body>
