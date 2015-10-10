@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Event\Event;
 use App\Controller\AppController;
 
 /**
@@ -10,6 +11,11 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    public $components = array('Auth');
+
+    public function beforeFilter(Event $event = null) {
+        $this->Auth->allow(['add']);
+    }
 
     /**
      * Index method
@@ -18,6 +24,12 @@ class UsersController extends AppController
      */
     public function index()
     {
+        // if the admin session hasn't been set
+        if (!($this->Auth->user()['admin'] > 0)) {
+            // set flash message and redirect
+            $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
+            return $this->redirect('/');
+        }
         $this->set('users', $this->paginate($this->Users));
         $this->set('_serialize', ['users']);
     }
@@ -31,6 +43,12 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        // if the admin session hasn't been set
+        if (!($this->Auth->user()['admin'] > 0)) {
+            // set flash message and redirect
+            $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
+            return $this->redirect('/');
+        }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -68,6 +86,12 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        // if the admin session hasn't been set
+        if (!($this->Auth->user()['admin'] > 0)) {
+            // set flash message and redirect
+            $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
+            return $this->redirect('/');
+        }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -93,6 +117,12 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        // if the admin session hasn't been set
+        if (!($this->Auth->user()['admin'] > 0)) {
+            // set flash message and redirect
+            $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
+            return $this->redirect('/');
+        }
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
@@ -119,10 +149,5 @@ class UsersController extends AppController
     {
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
-    }
-
-    public function beforeFilter(\Cake\Event\Event $event)
-    {
-        $this->Auth->allow(['add']);
     }
 }

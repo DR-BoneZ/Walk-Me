@@ -18,9 +18,8 @@ class WalkersController extends AppController
         // if the admin session hasn't been set
         if (!($this->Auth->user()['admin'] > 0)) {
             // set flash message and redirect
-            $this->Session->setFlash('You need to be an admin to access this area');
-            $this->redirect('/WalkMe/');
-            exit();
+            $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
+            return $this->redirect('/');
         }
     }
 
