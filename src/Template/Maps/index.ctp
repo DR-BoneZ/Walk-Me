@@ -19,7 +19,8 @@ $this->layout = 'maps';?>
 				map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
 				map.setZoom(15);
 				
-				var currentMarker = new H.map.Marker({lat:position.coords.latitude, lng:position.coords.longitude});
+				// set current position as a marker
+				var currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
 				map.addObject(currentMarker);
 			}
 			var platform = new H.service.Platform({
