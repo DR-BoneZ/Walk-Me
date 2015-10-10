@@ -44,13 +44,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Walk Me</a>
             </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="mynav">
                 <ul class="nav navbar-nav">
                     <li class="<?= $this->fetch('title') == "Pages" ? 'active' : '' ?>"><a href="/WalkMe">Home</a></li>
                     <li class="<?= $this->fetch('title') == "About" ? 'active' : '' ?>"><a href="/WalkMe/About">About</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
+
         </div><!-- /.container-fluid -->
     </nav>
     <?= $this->Flash->render() ?>
