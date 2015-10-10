@@ -48,7 +48,7 @@ class MapsController extends AppController
         $walkers = TableRegistry::get('Walkers');
         $lat = $this->request->data['latitude'];
         $long = $this->request->data['longitude'];
-        $query = $walkers->find('all', ['conditions' => ['Walkers.lat >' => $lat - .0144, 'Walkers.lat <' => $lat + .0144, 'Walkers.lng >' => $long - .0288, 'Walkers.lng <' => $long + .0288]]);
+        $query = $walkers->find('all', ['fields' => ['id', 'email', 'bio', 'lat', 'lng', 'name'], 'conditions' => ['Walkers.active =' => true, 'Walkers.lat >' => $lat - .0144, 'Walkers.lat <' => $lat + .0144, 'Walkers.lng >' => $long - .0288, 'Walkers.lng <' => $long + .0288]]);
         $this->set('json', json_encode($query));
     }
 }
