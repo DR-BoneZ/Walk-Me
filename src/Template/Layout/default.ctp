@@ -31,6 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('lavish-bootstrap.css') ?>
     <?= $this->Html->css('style.css') ?>
 
+    <?= $this->Html->script('jquery-2.1.4.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
 
     <?= $this->fetch('meta') ?>
@@ -43,12 +44,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Walk Me</a>
-            </div>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+                
+            <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target="#mynav">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="mynav">
                 <ul class="nav navbar-nav">
