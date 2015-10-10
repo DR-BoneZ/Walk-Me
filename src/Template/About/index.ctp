@@ -20,7 +20,7 @@ $this->layout = 'default';
 	<img class="media-object" style="height:306px ;width:408px" src="/WalkMe/img/far_angle.jpg" >
   </a>
   <div class="media-body">
-    <h4 class="media-heading">About WalkMe</h4>
+    <h2 class="media-heading">About WalkMe</h2>
       <h4> Our mission plan: </h4>
 	  <p3> We want to help alleviate pedestrians of fear in regard to public harassment. Walking
 		alone late at night can be one of the biggest hassles after leaving a concert, bar, 
