@@ -30,13 +30,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('lavish-bootstrap.css') ?>
     <?= $this->Html->css('style.css') ?>
-
+    <?= $this->Html->css('font-awesome.min.css') ?>
+	
     <?= $this->Html->script('jquery-2.1.4.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+	
 </head>
 <body>
     <nav class="navbar navbar-inverse" data-topbar role="navigation">

@@ -14,13 +14,24 @@
  */
 $this->layout = 'default';
 ?>
-<h1>About WalkMe</h1>
-<h4> Our mission plan: </h4>
-<p3> We want to help alleviate pedestrians of fear in regard to public harassment. Walking
-alone late at night can be one of the biggest hassles after leaving a concert, bar, 
-wedding or even a bar mitzvah. Harassment from strangers can cause a stressful
-evening and can even lead to physical harassment.WalkMe is  a solution to this problem. With 
-WalkMe users can request local trained companions to accompany them on journeys worry-free.
-We hope for the wide spread use of WalkMe to allow everyone the freedom of mind while 
-travelling on foot. 
-</p3>
+
+<div class="media">
+  <a class="pull-right">
+	<img class="media-object" style="height:306px ;width:408px" src="/WalkMe/img/far_angle.jpg" >
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">About WalkMe</h4>
+      <h4> Our mission plan: </h4>
+	  <p3> We want to help alleviate pedestrians of fear in regard to public harassment. Walking
+		alone late at night can be one of the biggest hassles after leaving a concert, bar, 
+		wedding or even a bar mitzvah. Harassment from strangers can cause a stressful
+		evening and can even lead to physical harassment.WalkMe is  a solution to this problem. With 
+		WalkMe users can request local trained companions to accompany them on journeys worry-free.
+		We hope for the wide spread use of WalkMe to allow everyone the freedom of mind while 
+		travelling on foot. 
+	  </p3>
+	   
+  </div>
+ 
+</div>
+
