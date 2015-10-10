@@ -16,3 +16,4 @@ $this->layout = 'default';
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
+<a class="btn btn-primary" href="/WalkMe/users/login"></a>
