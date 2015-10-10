@@ -63,7 +63,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div><!-- /.container-fluid -->
     </nav>
     <?= $this->Flash->render() ?>
-    <section class="container clearfix">
+    <section class="container main clearfix">
         <?= $this->fetch('content') ?>
     </section>
     <footer>
