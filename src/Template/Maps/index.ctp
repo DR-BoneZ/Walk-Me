@@ -22,6 +22,13 @@ $this->layout = 'maps';?>
 				// set current position as a marker
 				var currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
 				map.addObject(currentMarker);
+				
+				
+				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
+				data = eval(data);
+				var testMarker = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
+				map.addObject(testMarker);
+				});
 			}
 			var platform = new H.service.Platform({
 			app_id: 'qB42RwI8Kum9fXo2xpsJ',
@@ -43,5 +50,6 @@ $this->layout = 'maps';?>
 			// Create the default UI components
 			var ui = H.ui.UI.createDefault(map, defaultLayers);
 			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position);});
+			
 		</script>
 </div>
