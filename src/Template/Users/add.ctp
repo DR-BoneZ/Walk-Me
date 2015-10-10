@@ -1,4 +1,4 @@
-<div class="users form col-md-7 col-md-offset-3">
+<div class="users form col-md-6 col-md-offset-3">
     <?= $this->Form->create($user) ?>
     <h1>Register</h1>
     <?php
