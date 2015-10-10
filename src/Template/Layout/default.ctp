@@ -55,7 +55,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="mynav">
                 <ul class="nav navbar-nav">
-                    <li class="<?= $this->fetch('title') == "Pages" ? 'active' : '' ?>"><a href="/WalkMe">Home</a></li>
+                    <li class="<?= $this->fetch('title') == "Pages" || $this->fetch('title') == "Maps" ? 'active' : '' ?>"><a href="/WalkMe">Home</a></li>
                     <li class="<?= $this->fetch('title') == "About" ? 'active' : '' ?>"><a href="/WalkMe/About">About</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -66,7 +66,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div><!-- /.container-fluid -->
     </nav>
     <?= $this->Flash->render() ?>
-    <section class="container main clearfix">
+    <section class="container-fluid clearfix main">
         <?= $this->fetch('content') ?>
     </section>
     <footer>

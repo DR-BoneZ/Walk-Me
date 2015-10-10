@@ -2,6 +2,10 @@ body, html {
     height: 100%;
 }
 
+.tall {
+    height: 100%;
+}
+
 .container {
     margin: 0px 20px;
 }
@@ -14,6 +18,18 @@ body, html {
     margin-top: 0;
 }
 
-.container.main {
-    width: calc(100% - 40px);
+.container-fluid.main {
+    height: calc(100% - 72px);
+}
+
+.full-btn {
+    width: 100%;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100%; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
 }
