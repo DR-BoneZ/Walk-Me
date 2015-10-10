@@ -7,4 +7,6 @@
     ?>
     <?= $this->Form->button(__('Submit'), array('class' => 'btn btn-primary')) ?>
     <?= $this->Form->end() ?>
+	<br />
+    <a href="/WalkMe/users/login">Do you already have an account? Login here</a>
 </div>
