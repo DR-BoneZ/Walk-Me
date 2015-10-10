@@ -57,9 +57,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <ul class="nav navbar-nav">
                     <li class="<?= $this->fetch('title') == "Pages" ? 'active' : '' ?>"><a href="/WalkMe">Home</a></li>
                     <li class="<?= $this->fetch('title') == "About" ? 'active' : '' ?>"><a href="/WalkMe/About">About</a></li>
-                </ul>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+				    <li class="<?= $this->fetch('title') == "Login" ? 'active' : '' ?>"><a href="<?=$userId? "/WalkMe/users/logout" : "/WalkMe/users/login"?>" ><span class="fa fa-sign-in"></span> <?=$userId? "Logout" :"Login"?></a></li>
+				</ul>  
             </div><!-- /.navbar-collapse -->
-
         </div><!-- /.container-fluid -->
     </nav>
     <?= $this->Flash->render() ?>

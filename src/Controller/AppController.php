@@ -27,7 +27,7 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
+//public $helpers = array('Auth');
     /**
      * Initialization hook method.
      *
@@ -43,7 +43,6 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -63,6 +62,7 @@ class AppController extends Controller
         // Allow the display action so our pages controller
         // continues to work.
         $this->Auth->allow(['display']);
+		$this->set('userId', $this->Auth->user('id'));
     }
 
     /**
