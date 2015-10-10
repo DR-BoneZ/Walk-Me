@@ -13,17 +13,31 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 $this->layout = 'maps';?>
-<div id="mapContainer" style="width:600;height:600">
+<div id="mapContainer" >
 		<script type="text/javascript">
-			nokia.Settings.set("app_id", "qB42RwI8Kum9fXo2xpsJ");
-			nokia.Settings.set("app_code", "XcdhsTMx5naHN3Zi-e6_iQ");
-			var map = new nokia.maps.map.Display(
-				document.getElementById("mapContainer"), {
-				// Zoom level for the map
-				zoomLevel: 15,
-				// Map center coordinates
-				center: [37.8668, -122.2536]
+		    function showPosition(map, position){
+			
+				map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
+				map.setZoom(14);
 			}
-		);
-	</script>
+			var platform = new H.service.Platform({
+			app_id: 'qB42RwI8Kum9fXo2xpsJ',
+			app_code: 'XcdhsTMx5naHN3Zi-e6_iQ',
+			useCIT: true,
+			useHTTPS: true
+			});
+			var defaultLayers = platform.createDefaultLayers();
+			//Step 2: initialize a map  - not specificing a location will give a whole world view.
+			var map = new H.Map(document.getElementById('mapContainer'),
+				defaultLayers.normal.map);
+
+			//Step 3: make the map interactive
+			// MapEvents enables the event system
+			// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+			var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+			// Create the default UI components
+			var ui = H.ui.UI.createDefault(map, defaultLayers);
+			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position);});
+		</script>
 </div>

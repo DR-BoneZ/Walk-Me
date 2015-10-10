@@ -30,11 +30,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('lavish-bootstrap.css') ?>
     <?= $this->Html->css('style.css') ?>
     <?= $this->Html->css('font-awesome.min.css') ?>
+	<link rel="stylesheet" type="text/css"
+    href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
 	
     <?= $this->Html->script('jquery-2.1.4.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
     <script src="http://js.api.here.com/se/2.5.4/jsl.js" type="text/javascript" charset="utf-8"></script>
-
+    <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
