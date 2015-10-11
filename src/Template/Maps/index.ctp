@@ -15,11 +15,15 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
-		    function showPosition(map, position){
+		    function showPosition(map, position, make){
 				map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
 				map.setZoom(15);
 				
 				// set current position as a marker
+				if (!make) {
+					map.removeObject(currentMarker);
+					map.removeObject(testMarker);
+				}
 				var currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
 				map.addObject(currentMarker);
 				
@@ -28,7 +32,7 @@ $this->layout = 'maps';?>
 				data = eval(data);
 				var testMarker = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
 				map.addObject(testMarker);
-				window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position);});}, 10000)
+				window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false);});}, 10000)
 				});
 			}
 			var platform = new H.service.Platform({
@@ -50,7 +54,7 @@ $this->layout = 'maps';?>
 
 			// Create the default UI components
 			var ui = H.ui.UI.createDefault(map, defaultLayers);
-			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position);});
+			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, true);});
 			
 		</script>
 </div>
