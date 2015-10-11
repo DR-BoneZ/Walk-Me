@@ -15,14 +15,17 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
-		var globEvt, globMarker;
+		var globEvt, globMarker, dict, datas, id;
 			function onClick(evt){
 				//$('#myModal').modal('show')
 				if(evt.target == null || evt.target == undefined) return;
 				console.log(evt);
 				globEvt = evt;
 				if(evt.target.getId() in dict){
-					
+					id = dict[evt.target.getId()];
+					$('#myModal').modal('show');
+					$('#myModal #walkerName').text(datas[id].name);
+					$('#myModal #walkerBio').text(datas[id].bio);
 				}
 			}
 			
@@ -42,13 +45,13 @@ $this->layout = 'maps';?>
 				
 				
 				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
-					data = eval(data);
+					datas = eval(data);
 					dict = {};
-					for (i=0; i<data.length; i++) {
+					for (i=0; i<datas.length; i++) {
 						if (!make && testMarkers[i] != undefined && testMarkers[i] != null)
 							map.removeObject(testMarkers[i]);
-						testMarkers [i] = new H.map.DomMarker({lat:data[i].lat,lng:data[i].lng});
-						dict[testMarkers[i].getId()] = data[i].id;
+						testMarkers [i] = new H.map.DomMarker({lat:datas[i].lat,lng:datas[i].lng});
+						dict[testMarkers[i].getId()] = i;
 						map.addObject(testMarkers[i]);
 					}
 					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000);
@@ -82,4 +85,21 @@ $this->layout = 'maps';?>
 			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, true, null, []);});
 			
 		</script>
+</div>
+<div class="modal fade" id="myModal" role="dialog" style="top: 72px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content panel panel-primary">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="walkerName">Modal title</h4>
+      </div>
+      <div class="modal-body panel-body" id="walkerBio">
+        ...
+      </div>
+      <div class="modal-footer panel-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="request()">Request</button>
+      </div>
+    </div>
+  </div>
 </div>
