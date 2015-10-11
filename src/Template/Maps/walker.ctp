@@ -15,9 +15,37 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
-		var globEvt, globMarker, lat, lng, dlat, dlng, map, datas;
+			var globEvt, globMarker, lat, lng, datas, dlat, dlong, map, datas, pos, polyline;
 			
-		    function showPosition(map, position, make, currentMarker, destMarker){
+			function calculateRouteFromAtoB (platform) {
+  				var router = platform.getRoutingService(),
+    			routeRequestParams = {
+      				mode: 'shortest;pedestrian',
+      				representation: 'display',
+      				waypoint0: pos.coords.latitude+','+ pos.coords.longitude , 
+      				waypoint1: datas.dlat+','+datas.dlng , // Destination
+      				routeattributes: 'waypoints,summary,shape,legs',
+     			 	maneuverattributes: 'direction,action'
+    			};
+  				router.calculateRoute(
+    				routeRequestParams,
+    				onSuccess,
+    				onError
+  				);
+			}
+
+			function onError(error) {
+  				console.log(error);
+			}
+
+			function onSuccess(result) {
+  				var route = result.response.route[0];
+  				addRouteShapeToMap(route);
+  				addManueversToMap(route);
+  			}
+
+		    function showPosition(map, position, make, currentMarker, destMarker, makeRoute){
+		    	pos = position;
 		    	if (make) {
 					map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
 					map.setZoom(15);
@@ -40,10 +68,18 @@ $this->layout = 'maps';?>
     					}
 						destMarker = new H.map.DomMarker({lat:datas.dlat,lng:datas.dlng});;
 						map.addObject(destMarker);
+						if (datas.dlat != dlat || datas.dlng != dlng) {
+							if (!makeRoute && polyline != undefined && polyline != null) {
+								map.removeObject(polyline);
+							}
+							calculateRouteFromAtoB (platform);
+							dlat = datas.dlat;
+							dlng = datas.dlng;
+						}
 					}
-					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, destMarker);});}, 10000);
+					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, destMarker, false);});}, 10000);
 				}).error(function() {
-					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, destMarker);});}, 10000);
+					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, destMarker, false);});}, 10000);
 				});
 			}
 			var platform = new H.service.Platform({
@@ -53,6 +89,56 @@ $this->layout = 'maps';?>
 			useHTTPS: true
 			});
 			
+			function addRouteShapeToMap(route){
+  				var strip = new H.geo.Strip(),
+    			routeShape = route.shape;
+
+  				routeShape.forEach(function(point) {
+    				var parts = point.split(',');
+    				strip.pushLatLngAlt(parts[0], parts[1]);
+  				});
+
+  				polyline = new H.map.Polyline(strip, {
+    				style: {
+      					lineWidth: 4,
+      					strokeColor: 'rgba(0, 128, 255, 0.7)'
+    				}
+  				});
+ 				// Add the polyline to the map
+  				map.addObject(polyline);
+  				// And zoom to its bounding rectangle
+ 				map.setViewBounds(polyline.getBounds(), true);
+			}
+
+			function addManueversToMap(route){
+  			/*	var svgMarkup = '<svg width="18" height="18" ' +
+    			'xmlns="http://www.w3.org/2000/svg">' +
+    			'<circle cx="8" cy="8" r="8" ' +
+      			'fill="#1b468d" stroke="white" stroke-width="1"  />' +
+    			'</svg>',
+    			dotIcon = new H.map.Icon(svgMarkup, {anchor: {x:8, y:8}}),
+    			group = new  H.map.Group(),
+   				i,
+    			j;
+
+  				// Add a marker for each maneuver
+  				for (i = 0;  i < route.leg.length; i += 1) {
+    				for (j = 0;  j < route.leg[i].maneuver.length; j += 1) {
+      					// Get the next maneuver.
+     					maneuver = route.leg[i].maneuver[j];
+      					// Add a marker to the maneuvers group
+      					var marker =  new H.map.Marker({
+        					lat: maneuver.position.latitude,
+        					lng: maneuver.position.longitude} ,
+        					{icon: dotIcon});
+      					marker.instruction = maneuver.instruction;
+      					group.addObject(marker);
+    				}
+  				}
+  				// Add the maneuvers group to the map
+  				map.addObject(group);*/
+			}
+
 			var defaultLayers = platform.createDefaultLayers();
 			//Step 2: initialize a map  - not specificing a location will give a whole world view.
 			map = new H.Map(document.getElementById('mapContainer'),
@@ -67,7 +153,10 @@ $this->layout = 'maps';?>
 
 			// Create the default UI components
 			var ui = H.ui.UI.createDefault(map, defaultLayers);
-			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, true, null, []);});
+			navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, true, null, [], true);});
+			Number.prototype.toMMSS = function () {
+  				return  Math.floor(this / 60)  +' minutes '+ (this % 60)  + ' seconds.';
+			}
 			
 		</script>
 </div>

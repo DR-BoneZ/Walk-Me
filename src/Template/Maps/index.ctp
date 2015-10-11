@@ -15,8 +15,9 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
-		var globEvt, globMarker, dict, datas, id, latLong, map, pos, requestMarker;
+		var globEvt, globMarker, dict, datas, id, latLong, map, pos, requestMarker, polyline;
 		var polling = false;
+		var makeRoute = true;
 			function onClick(evt){
 				//$('#myModal').modal('show')
 				if(evt.target == null || evt.target == undefined) return;
@@ -80,11 +81,15 @@ $this->layout = 'maps';?>
 					}
 				});
 				// Now use the map as required...
-			calculateRouteFromAtoB (platform);
+				if (!makeRoute && polyline != undefined && polyline != null) {
+					map.removeObject(polyline);
+				}
+				calculateRouteFromAtoB (platform);
 
 			}
 
 			function calculateRouteFromAtoB (platform) {
+				makeRoute = false;
   				var router = platform.getRoutingService(),
     			routeRequestParams = {
       				mode: 'shortest;pedestrian',
@@ -156,8 +161,7 @@ $this->layout = 'maps';?>
 			
 			function addRouteShapeToMap(route){
   				var strip = new H.geo.Strip(),
-    			routeShape = route.shape,
-    			polyline;
+    			routeShape = route.shape;
 
   				routeShape.forEach(function(point) {
     				var parts = point.split(',');
@@ -177,7 +181,7 @@ $this->layout = 'maps';?>
 			}
 
 			function addManueversToMap(route){
-  				var svgMarkup = '<svg width="18" height="18" ' +
+  				/*var svgMarkup = '<svg width="18" height="18" ' +
     			'xmlns="http://www.w3.org/2000/svg">' +
     			'<circle cx="8" cy="8" r="8" ' +
       			'fill="#1b468d" stroke="white" stroke-width="1"  />' +
@@ -202,7 +206,7 @@ $this->layout = 'maps';?>
     				}
   				}
   				// Add the maneuvers group to the map
-  				map.addObject(group);
+  				map.addObject(group);*/
 			}
 
 			var defaultLayers = platform.createDefaultLayers();
