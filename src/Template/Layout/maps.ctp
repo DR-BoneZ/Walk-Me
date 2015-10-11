@@ -19,7 +19,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <html>
 <head>
     <?= $this->Html->charset() ?>
-    <link rel="shortcut icon" href="/WalkMe/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?= $this->fetch('title') ?>

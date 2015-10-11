@@ -189,3 +189,7 @@ body, html {
 .directions li span.ferry  {
   background-position:-1316px;
   }
+
+  .profile-pic {
+    width: 128px;
+  }

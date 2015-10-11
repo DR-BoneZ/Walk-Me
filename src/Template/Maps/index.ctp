@@ -28,6 +28,7 @@ $this->layout = 'maps';?>
 					$('#myModal').modal('show');
 					$('#myModal #walkerName').text(datas[id].name);
 					$('#myModal #walkerBio').text(datas[id].bio);
+					$('#myModal #walkerImg').html('<img class="media-object profile-pic" src="/WalkMe/img/users/'+datas[id].id+'.jpg">')
 				}
 			}
 
@@ -240,8 +241,11 @@ $this->layout = 'maps';?>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="walkerName">Modal title</h4>
       </div>
-      <div class="modal-body panel-body" id="walkerBio">
-        ...
+      <div class="modal-body panel-body">
+        <div class="media">
+  			<div class="media-left" id="walkerImg"></div>
+  			<div class="media-body" id="walkerBio"></div>
+		</div>
       </div>
       <div class="modal-footer panel-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

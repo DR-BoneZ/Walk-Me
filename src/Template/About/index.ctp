@@ -22,13 +22,19 @@ $this->layout = 'default';
   <div class="media-body">
     <h2 class="media-heading">About WalkMe</h2>
       <h4> Our mission plan: </h4>
-	  <p3> We want to help alleviate pedestrians of fear in regard to public harassment. Walking
-		alone late at night can be one of the biggest hassles after leaving a concert, bar, 
-		wedding or even a bar mitzvah. Harassment from strangers can cause a stressful
-		evening and can even lead to physical harassment.WalkMe is  a solution to this problem. With 
-		WalkMe users can request local trained companions to accompany them on journeys worry-free.
-		We hope for the wide spread use of WalkMe to allow everyone the freedom of mind while 
-		travelling on foot. 
+	  <p3> Street harassment is not just an issue- it is a crisis. 
+	  		<br><br>
+			A recent study in the of the LGBTQ in the EU found that, of the 93,000 interviewed, half avoided public places sometimes out of fear of street harassment. 99% of women report being harassed.
+			<br><br>
+			This has to change- and we believe we have stumbled upon a solution that is sustainable, sound, and effective with the potential for exponential growth globally.
+			<br><br>
+			Street Harassment is about perceived power. When walking alone someone of less perceived power can be vulnerable. 
+			<br><br>
+			However we have found that when someone who may be vulnerable is accompanied by someone with perceived power- the harassment stops entirely.
+			<br><br>
+			We want to grow this phenomenon exponentially!
+			<br><br>
+			We are building an app to create an "uber" like community of companionship so that anyone who feels unsafe can simply press a button to bring someone with perceived power who is kind and most importantly safe to walk with them. 
 	  </p3>
 	   
   </div>
