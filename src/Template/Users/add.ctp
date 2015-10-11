@@ -2,11 +2,13 @@
     <?= $this->Form->create($user) ?>
     <h1>Register</h1>
     <?php
-        echo $this->Form->input('email');
-        echo $this->Form->input('password');
+            echo $this->Form->input('name');
+            echo $this->Form->input('bio');
+            echo $this->Form->input('email');
+            echo $this->Form->input('password');
     ?>
     <?= $this->Form->button(__('Submit'), array('class' => 'btn btn-primary')) ?>
     <?= $this->Form->end() ?>
-	<br />
+    <br />
     <a href="/WalkMe/users/login">Do you already have an account? Login here</a>
 </div>

@@ -45,6 +45,13 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
+
+        $validator
+            ->allowEmpty('bio');
+
+        $validator
             ->add('email', 'valid', ['rule' => 'email'])
             ->requirePresence('email', 'create')
             ->notEmpty('email');
@@ -52,6 +59,27 @@ class UsersTable extends Table
         $validator
             ->requirePresence('password', 'create')
             ->notEmpty('password');
+
+        $validator
+            ->add('admin', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('admin', 'create')
+            ->notEmpty('admin');
+
+        $validator
+            ->add('lat', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('lat');
+
+        $validator
+            ->add('lng', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('lng');
+
+        $validator
+            ->add('dlat', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('dlat');
+
+        $validator
+            ->add('dlng', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('dlng');
 
         return $validator;
     }

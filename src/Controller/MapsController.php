@@ -42,13 +42,33 @@ class MapsController extends AppController
     }
     public function index()
     {
+        if ($this->Auth->user()['admin'] == 1) {
+            return $this->redirect('/maps/walker');
+        }
+    }
+
+    public function walker()
+    {
+
     }
 
     public function nearby() {
-        $walkers = TableRegistry::get('Walkers');
+        $Users = TableRegistry::get('Users');
         $lat = $this->request->data['latitude'];
         $long = $this->request->data['longitude'];
-        $query = $walkers->find('all', ['fields' => ['id', 'email', 'bio', 'lat', 'lng', 'name'], 'conditions' => ['Walkers.active =' => true, 'Walkers.lat >' => $lat - .0144, 'Walkers.lat <' => $lat + .0144, 'Walkers.lng >' => $long - .0288, 'Walkers.lng <' => $long + .0288]]);
+        $query = $Users->find('all', ['fields' => ['id', 'email', 'bio', 'lat', 'lng', 'dlat', 'dlng', 'name'], 'conditions' => ['Users.admin =' => 1, 'Users.lat >' => $lat - .0144, 'Users.lat <' => $lat + .0144, 'Users.lng >' => $long - .0288, 'Users.lng <' => $long + .0288]]);
+        $this->set('json', json_encode($query));
+    }
+
+    public function latlng() {
+        $Users = TableRegistry::get('Users');
+        $lat = $this->request->data['latitude'];
+        $lng = $this->request->data['longitude'];
+        $id = $this->Auth->user('id');
+        $user = $Users->get($id, ['contain' => []]);
+        $user = $Users->patchEntity($user, $this->request->data);
+        $Users->save($user);
+        $query = $Users->findById($id);
         $this->set('json', json_encode($query));
     }
 }

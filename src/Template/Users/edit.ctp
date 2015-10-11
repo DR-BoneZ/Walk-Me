@@ -15,8 +15,15 @@
     <fieldset>
         <legend><?= __('Edit User') ?></legend>
         <?php
+            echo $this->Form->input('name');
+            echo $this->Form->input('bio');
             echo $this->Form->input('email');
             echo $this->Form->input('password');
+            echo $this->Form->input('admin');
+            echo $this->Form->input('lat');
+            echo $this->Form->input('lng');
+            echo $this->Form->input('dlat');
+            echo $this->Form->input('dlng');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

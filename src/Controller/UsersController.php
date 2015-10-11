@@ -25,7 +25,7 @@ class UsersController extends AppController
     public function index()
     {
         // if the admin session hasn't been set
-        if (!($this->Auth->user()['admin'] > 0)) {
+        if (!($this->Auth->user()['admin'] > 1)) {
             // set flash message and redirect
             $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
             return $this->redirect('/');
@@ -44,7 +44,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         // if the admin session hasn't been set
-        if (!($this->Auth->user()['admin'] > 0)) {
+        if (!($this->Auth->user()['admin'] > 1)) {
             // set flash message and redirect
             $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
             return $this->redirect('/');
@@ -77,6 +77,27 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
+    public function adminAdd()
+    {
+        if (!($this->Auth->user()['admin'] > 1)) {
+            // set flash message and redirect
+            $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
+            return $this->redirect('/');
+        }
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+
     /**
      * Edit method
      *
@@ -87,7 +108,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         // if the admin session hasn't been set
-        if (!($this->Auth->user()['admin'] > 0)) {
+        if (!($this->Auth->user()['admin'] > 1)) {
             // set flash message and redirect
             $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
             return $this->redirect('/');
@@ -118,7 +139,7 @@ class UsersController extends AppController
     public function delete($id = null)
     {
         // if the admin session hasn't been set
-        if (!($this->Auth->user()['admin'] > 0)) {
+        if (!($this->Auth->user()['admin'] > 1)) {
             // set flash message and redirect
             $this->Flash->set('You must be an admin to access this page.', ['element' => 'error']);
             return $this->redirect('/');

@@ -32,7 +32,7 @@ $this->layout = 'maps';?>
 			function request(){				                    
 				$('#requestModal').modal('show');
 				$('#requestModal #titleModal').text('Request a Route');
-				$('#requestModal #formModal').html('Enter Adress: <input type="text" id="request"/> ');
+				$('#requestModal #formModal').html('Enter Address: <input type="text" id="request"/> ');
 			}
 
 			function go(){
