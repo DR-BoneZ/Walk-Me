@@ -31,7 +31,8 @@ $this->layout = 'maps';?>
 				data = eval(data);
 				var testMarkers = [];
 				for (i=0; i<data.length; i++) {
-					map.removeObject(testMarkers[i]);
+					if (!make)
+						map.removeObject(testMarkers[i]);
 					testMarkers [i] = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
 					map.addObject(testMarkers[i]);
 				}
