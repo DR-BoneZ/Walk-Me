@@ -49,7 +49,9 @@ class MapsController extends AppController
 
     public function walker()
     {
-
+        if ($this->Auth->user()['admin'] != 1) {
+            return $this->redirect('/maps');
+        }
     }
 
     public function nearby() {
