@@ -31,7 +31,7 @@ $this->layout = 'maps';?>
 				globMarker = currentMarker;
 				map.addObject(currentMarker);
 
-				$.ajax({method:"post", url:"/WalkMe/maps/latlng",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
+				$.ajax({method:"post", url:"/WalkMe/maps/latlng",data:{lat:position.coords.latitude,lng:position.coords.longitude}}).success(function(data){
 					datas = eval(data)[0];
 					if (datas.dlat != null) {
 						destMarker = new H.map.DomMarker({lat:datas.dlat,lng:datas.dlng});;
