@@ -16,6 +16,7 @@ $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
 		var globEvt, globMarker, dict, datas, id, latLong, map, pos, requestMarker;
+		var polling = false;
 			function onClick(evt){
 				//$('#myModal').modal('show')
 				if(evt.target == null || evt.target == undefined) return;
@@ -63,6 +64,7 @@ $this->layout = 'maps';?>
     				requestMarker = new H.map.DomMarker({lat:latLong.Latitude, lng:latLong.Longitude});
 					map.addObject(requestMarker);
 					map.setCenter({lat:latLong.Latitude, lng:latLong.Longitude});
+					polling = true;
   				}
 				});
 			}
@@ -104,6 +106,10 @@ $this->layout = 'maps';?>
 						testMarkers [i] = new H.map.DomMarker({lat:datas[i].lat,lng:datas[i].lng});
 						dict[testMarkers[i].getId()] = i;
 						map.addObject(testMarkers[i]);
+					}
+					if (datas[id].lat >= position.coords.latitude - 0.002 && datas[id].lat <= position.coords.latitude + 0.002 && datas[id].lng >= position.coords.longitude - 0.004 && datas[id].lng <= position.coords.longitude + 0.004 && polling) {
+						route();
+						polling = false;
 					}
 					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000);
 				}).error(function() {
