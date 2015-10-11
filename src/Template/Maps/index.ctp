@@ -28,6 +28,7 @@ $this->layout = 'maps';?>
 				data = eval(data);
 				var testMarker = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
 				map.addObject(testMarker);
+				window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position);});}, 10000)
 				});
 			}
 			var platform = new H.service.Platform({
