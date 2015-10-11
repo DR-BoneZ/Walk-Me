@@ -101,13 +101,14 @@ $this->layout = 'maps';?>
 					datas = eval(data);
 					dict = {};
 					for (i=0; i<datas.length; i++) {
-						if (!make && testMarkers[i] != undefined && testMarkers[i] != null)
+						if (!make && testMarkers[i] != undefined && testMarkers[i] != null) {
 							map.removeObject(testMarkers[i]);
+						}
 						testMarkers [i] = new H.map.DomMarker({lat:datas[i].lat,lng:datas[i].lng});
 						dict[testMarkers[i].getId()] = i;
 						map.addObject(testMarkers[i]);
 					}
-					if (datas[id].lat >= position.coords.latitude - 0.002 && datas[id].lat <= position.coords.latitude + 0.002 && datas[id].lng >= position.coords.longitude - 0.004 && datas[id].lng <= position.coords.longitude + 0.004 && polling) {
+					if (id != undefined && id != null && id in datas && datas[id].lat >= position.coords.latitude - 0.002 && datas[id].lat <= position.coords.latitude + 0.002 && datas[id].lng >= position.coords.longitude - 0.004 && datas[id].lng <= position.coords.longitude + 0.004 && polling) {
 						route();
 						polling = false;
 					}
