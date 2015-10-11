@@ -71,7 +71,7 @@ $this->layout = 'maps';?>
 				map.addObject(currentMarker);
 				
 				
-				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
+				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{lat:position.coords.latitude,lng:position.coords.longitude}}).success(function(data){
 					datas = eval(data);
 					dict = {};
 					for (i=0; i<datas.length; i++) {

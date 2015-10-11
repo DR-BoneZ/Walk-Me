@@ -56,16 +56,18 @@ class MapsController extends AppController
 
     public function nearby() {
         $Users = TableRegistry::get('Users');
-        $lat = $this->request->data['latitude'];
-        $long = $this->request->data['longitude'];
+        $lat = $this->request->data['lat'];
+        $long = $this->request->data['lng'];
+        $id = $this->Auth->user('id');
+        $user = $Users->get($id, ['contain' => []]);
+        $user = $Users->patchEntity($user, $this->request->data);
+        $Users->save($user);
         $query = $Users->find('all', ['fields' => ['id', 'email', 'bio', 'lat', 'lng', 'dlat', 'dlng', 'name'], 'conditions' => ['Users.admin =' => 1, 'Users.lat >' => $lat - .0144, 'Users.lat <' => $lat + .0144, 'Users.lng >' => $long - .0288, 'Users.lng <' => $long + .0288]]);
         $this->set('json', json_encode($query));
     }
 
     public function latlng() {
         $Users = TableRegistry::get('Users');
-        $lat = $this->request->data['latitude'];
-        $lng = $this->request->data['longitude'];
         $id = $this->Auth->user('id');
         $user = $Users->get($id, ['contain' => []]);
         $user = $Users->patchEntity($user, $this->request->data);
