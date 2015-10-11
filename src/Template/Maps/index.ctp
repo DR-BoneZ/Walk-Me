@@ -15,6 +15,17 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
+		var globEvt, globMarker;
+			function onClick(evt){
+				//$('#myModal').modal('show')
+				if(evt.target == null || evt.target == undefined) return;
+				console.log(evt);
+				globEvt = evt;
+				if(evt.target.getId() in dict){
+					
+				}
+			}
+			
 		    function showPosition(map, position, make, currentMarker, testMarkers){
 		    	if (make) {
 					map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
@@ -26,15 +37,18 @@ $this->layout = 'maps';?>
 					map.removeObject(currentMarker);
 				}
 				currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
+				globMarker = currentMarker;
 				map.addObject(currentMarker);
 				
 				
 				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
 					data = eval(data);
+					dict = {};
 					for (i=0; i<data.length; i++) {
 						if (!make && testMarkers[i] != undefined && testMarkers[i] != null)
 							map.removeObject(testMarkers[i]);
 						testMarkers [i] = new H.map.DomMarker({lat:data[i].lat,lng:data[i].lng});
+						dict[testMarkers[i].getId()] = data[i].id;
 						map.addObject(testMarkers[i]);
 					}
 					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000);
@@ -54,10 +68,14 @@ $this->layout = 'maps';?>
 			var map = new H.Map(document.getElementById('mapContainer'),
 				defaultLayers.normal.map);
 
-			//Step 3: make the map interactive
+			//make the map interactive
 			// MapEvents enables the event system
 			// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-			var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+			var mapEvents = new H.mapevents.MapEvents(map);
+			var behavior = new H.mapevents.Behavior(mapEvents);
+			// Add event listener:
+			map.addEventListener('tap', onClick);
+
 
 			// Create the default UI components
 			var ui = H.ui.UI.createDefault(map, defaultLayers);
