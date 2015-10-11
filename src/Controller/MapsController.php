@@ -75,4 +75,14 @@ class MapsController extends AppController
         $query = $Users->findById($id);
         $this->set('json', json_encode($query));
     }
+
+    public function request() {
+        $Users = TableRegistry::get('Users');
+        $id = $this->request->data['id'];
+        $user = $Users->get($id, ['contain' => []]);
+        $user = $Users->patchEntity($user, $this->request->data);
+        $Users->save($user);
+        $query = $Users->findById($id);
+        $this->set('json', json_encode($query));
+    }
 }

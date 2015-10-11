@@ -15,7 +15,7 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
-		var globEvt, globMarker, dict, datas, id, latLong, map;
+		var globEvt, globMarker, dict, datas, id, latLong, map, pos;
 			function onClick(evt){
 				//$('#myModal').modal('show')
 				if(evt.target == null || evt.target == undefined) return;
@@ -33,6 +33,15 @@ $this->layout = 'maps';?>
 				$('#requestModal').modal('show');
 				$('#requestModal #titleModal').text('Request a Route');
 				$('#requestModal #formModal').html('Enter Address: <input type="text" id="request"/> ');
+				$.ajax({
+					url: '/WalkMe/maps/request',
+					method: 'POST',
+					data: {
+						id: id,
+						dlat: pos.coords.latitude,
+						dlng: pos.coords.longitude
+					}
+				})
 			}
 
 			function go(){
@@ -55,8 +64,21 @@ $this->layout = 'maps';?>
   				}
 				});
 			}
+
+			function route() {
+				$.ajax({
+					url: '/WalkMe/maps/request',
+					method: 'POST',
+					data: {
+						id: id,
+						dlat: latLong.Latitude,
+						dlng: latLong.Longitude
+					}
+				})
+			}
 			
 		    function showPosition(map, position, make, currentMarker, testMarkers){
+		    	pos = position;
 		    	if (make) {
 					map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
 					map.setZoom(15);
