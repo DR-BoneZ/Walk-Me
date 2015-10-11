@@ -22,7 +22,6 @@ $this->layout = 'maps';?>
 				// set current position as a marker
 				if (!make) {
 					map.removeObject(currentMarker);
-					map.removeObject(testMarker);
 				}
 				var currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
 				map.addObject(currentMarker);
@@ -30,8 +29,12 @@ $this->layout = 'maps';?>
 				
 				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
 				data = eval(data);
-				var testMarker = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
-				map.addObject(testMarker);
+				var testMarkers = [];
+				for (i=0; i<data.length; i++) {
+					map.removeObject(testMarkers[i]);
+					testMarkers [i] = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
+					map.addObject(testMarkers[i]);
+				}
 				window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false);});}, 10000)
 				});
 			}
