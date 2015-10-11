@@ -33,9 +33,11 @@ $this->layout = 'maps';?>
 
 				$.ajax({method:"post", url:"/WalkMe/maps/latlng",data:{lat:position.coords.latitude,lng:position.coords.longitude}}).success(function(data){
 					datas = eval(data)[0];
+					console.log(destMarker);
 					if (datas.dlat != null) {
-						if (destMarker != null && destMarker != undefined)
+						if (!make && destMarker != null && destMarker != undefined && destMarker != []) {
     						map.removeObject(destMarker);
+    					}
 						destMarker = new H.map.DomMarker({lat:datas.dlat,lng:datas.dlng});;
 						map.addObject(destMarker);
 					}
