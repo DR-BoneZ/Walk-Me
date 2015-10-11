@@ -16,7 +16,6 @@
         <legend><?= __('Edit Walker') ?></legend>
         <?php
             echo $this->Form->input('email');
-            echo $this->Form->input('password');
             echo $this->Form->input('bio');
             echo $this->Form->input('active');
             echo $this->Form->input('lat');

@@ -11,7 +11,6 @@
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('email') ?></th>
-                <th><?= $this->Paginator->sort('password') ?></th>
                 <th><?= $this->Paginator->sort('active') ?></th>
                 <th><?= $this->Paginator->sort('lat') ?></th>
                 <th><?= $this->Paginator->sort('lng') ?></th>
@@ -24,7 +23,6 @@
             <tr>
                 <td><?= $this->Number->format($walker->id) ?></td>
                 <td><?= h($walker->email) ?></td>
-                <td><?= h($walker->password) ?></td>
                 <td><?= h($walker->active) ?></td>
                 <td><?= $this->Number->format($walker->lat) ?></td>
                 <td><?= $this->Number->format($walker->lng) ?></td>

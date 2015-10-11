@@ -15,10 +15,6 @@
             <td><?= h($walker->email) ?></td>
         </tr>
         <tr>
-            <th><?= __('Password') ?></th>
-            <td><?= h($walker->password) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($walker->name) ?></td>
         </tr>
