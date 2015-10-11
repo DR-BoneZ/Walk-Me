@@ -18,6 +18,9 @@ $this->layout = 'maps';?>
 		var globEvt, globMarker, dict, datas, id, latLong, map, pos, requestMarker, polyline;
 		var polling = false;
 		var makeRoute = true;
+		var icon = new H.map.Icon('/WalkMe/img/user.png');
+		var wicon = new H.map.Icon('/WalkMe/img/walker.png');
+		var dicon = new H.map.Icon('/WalkMe/img/marker.png');
 			function onClick(evt){
 				//$('#myModal').modal('show')
 				if(evt.target == null || evt.target == undefined) return;
@@ -63,7 +66,7 @@ $this->layout = 'maps';?>
     				latLong = data.Response.View[0].Result[0].Location.DisplayPosition;
     				if (requestMarker != null && requestMarker != undefined)
     					map.removeObject(requestMarker);
-    				requestMarker = new H.map.DomMarker({lat:latLong.Latitude, lng:latLong.Longitude});
+    				requestMarker = new H.map.Marker({lat:latLong.Latitude, lng:latLong.Longitude},{icon : dicon});
 					map.addObject(requestMarker);
 					map.setCenter({lat:latLong.Latitude, lng:latLong.Longitude});
 					polling = true;
@@ -128,7 +131,7 @@ $this->layout = 'maps';?>
 				if (!make) {
 					map.removeObject(currentMarker);
 				}
-				currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
+				currentMarker = new H.map.Marker({lat:position.coords.latitude, lng:position.coords.longitude},{icon : icon});
 				globMarker = currentMarker;
 				map.addObject(currentMarker);
 				
@@ -140,7 +143,7 @@ $this->layout = 'maps';?>
 						if (!make && testMarkers[i] != undefined && testMarkers[i] != null) {
 							map.removeObject(testMarkers[i]);
 						}
-						testMarkers [i] = new H.map.DomMarker({lat:datas[i].lat,lng:datas[i].lng});
+						testMarkers [i] = new H.map.Marker({lat:datas[i].lat,lng:datas[i].lng},{icon : wicon});
 						dict[testMarkers[i].getId()] = i;
 						map.addObject(testMarkers[i]);
 					}

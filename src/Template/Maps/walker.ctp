@@ -16,7 +16,8 @@ $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
 			var globEvt, globMarker, lat, lng, datas, dlat, dlong, map, datas, pos, polyline;
-			
+			var icon = new H.map.Icon('/WalkMe/img/user.png');
+			var dicon = new H.map.Icon('/WalkMe/img/marker.png');
 			function calculateRouteFromAtoB (platform) {
   				var router = platform.getRoutingService(),
     			routeRequestParams = {
@@ -55,7 +56,7 @@ $this->layout = 'maps';?>
 				if (!make) {
 					map.removeObject(currentMarker);
 				}
-				currentMarker = new H.map.DomMarker({lat:position.coords.latitude, lng:position.coords.longitude});
+				currentMarker = new H.map.Marker({lat:position.coords.latitude, lng:position.coords.longitude},{icon:icon});
 				globMarker = currentMarker;
 				map.addObject(currentMarker);
 
@@ -66,7 +67,7 @@ $this->layout = 'maps';?>
 						if (!make && destMarker != null && destMarker != undefined && destMarker != []) {
     						map.removeObject(destMarker);
     					}
-						destMarker = new H.map.DomMarker({lat:datas.dlat,lng:datas.dlng});;
+						destMarker = new H.map.Marker({lat:datas.dlat,lng:datas.dlng},{icon : dicon});;
 						map.addObject(destMarker);
 						if (datas.dlat != dlat || datas.dlng != dlng) {
 							if (!makeRoute && polyline != undefined && polyline != null) {
