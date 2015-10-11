@@ -16,8 +16,10 @@ $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
 		    function showPosition(map, position, make, currentMarker, testMarkers){
-				map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
-				map.setZoom(15);
+		    	if (make) {
+					map.setCenter({lat:position.coords.latitude, lng:position.coords.longitude});
+					map.setZoom(15);
+				}
 				
 				// set current position as a marker
 				if (!make) {
@@ -28,14 +30,16 @@ $this->layout = 'maps';?>
 				
 				
 				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
-				data = eval(data);
-				for (i=0; i<data.length; i++) {
-					if (!make)
-						map.removeObject(testMarkers[i]);
-					testMarkers [i] = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
-					map.addObject(testMarkers[i]);
-				}
-				window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000)
+					data = eval(data);
+					for (i=0; i<data.length; i++) {
+						if (!make)
+							map.removeObject(testMarkers[i]);
+						testMarkers [i] = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
+						map.addObject(testMarkers[i]);
+					}
+					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000);
+				}).error(function() {
+					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000);
 				});
 			}
 			var platform = new H.service.Platform({
