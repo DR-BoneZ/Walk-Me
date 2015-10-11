@@ -15,7 +15,7 @@
 $this->layout = 'maps';?>
 <div id="mapContainer" >
 		<script type="text/javascript">
-		var globEvt, globMarker, dict, datas, id, latLong, map, pos;
+		var globEvt, globMarker, dict, datas, id, latLong, map, pos, requestMarker;
 			function onClick(evt){
 				//$('#myModal').modal('show')
 				if(evt.target == null || evt.target == undefined) return;
@@ -58,6 +58,8 @@ $this->layout = 'maps';?>
   				},
   				success: function (data) {
     				latLong = data.Response.View[0].Result[0].Location.DisplayPosition;
+    				if (requestMarker != null && requestMarker != undefined)
+    					map.removeObject(requestMarker);
     				requestMarker = new H.map.DomMarker({lat:latLong.Latitude, lng:latLong.Longitude});
 					map.addObject(requestMarker);
 					map.setCenter({lat:latLong.Latitude, lng:latLong.Longitude});
