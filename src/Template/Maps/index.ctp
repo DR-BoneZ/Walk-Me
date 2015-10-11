@@ -32,9 +32,9 @@ $this->layout = 'maps';?>
 				$.ajax({method:"post", url:"/WalkMe/maps/nearby",data:{latitude:position.coords.latitude,longitude:position.coords.longitude}}).success(function(data){
 					data = eval(data);
 					for (i=0; i<data.length; i++) {
-						if (!make)
+						if (!make && testMarkers[i] != undefined && testMarkers[i] != null)
 							map.removeObject(testMarkers[i]);
-						testMarkers [i] = new H.map.DomMarker({lat:data[0].lat,lng:data[0].lng});
+						testMarkers [i] = new H.map.DomMarker({lat:data[i].lat,lng:data[i].lng});
 						map.addObject(testMarkers[i]);
 					}
 					window.setTimeout(function () {navigator.geolocation.getCurrentPosition(function (position){showPosition(map,position, false, currentMarker, testMarkers);});}, 10000);
