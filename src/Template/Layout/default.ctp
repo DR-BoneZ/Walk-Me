@@ -55,8 +55,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="mynav">
                 <ul class="nav navbar-nav">
-                    <li class="<?= $this->fetch('title') == "Pages" || $this->fetch('title') == "Maps" ? 'active' : '' ?>"><a href="/WalkMe">Home</a></li>
-                    <li class="<?= $this->fetch('title') == "About" ? 'active' : '' ?>"><a href="/WalkMe/About">About</a></li>
+                    <li class="<?= $this->fetch('title') == "Pages" || $this->fetch('title') == "Maps" ? 'active' : '' ?>"><a href="/WalkMe"><span class="fa fa-home"></span> Home</a></li>
+                    <li class="<?= $this->fetch('title') == "About" ? 'active' : '' ?>"><a href="/WalkMe/About"><span class="fa fa-question-circle"></span> About</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?= $userId ? "": '<li><a href="/WalkMe/users/add"><span class="fa fa-user-plus"></span> Register</a></li>'?>
