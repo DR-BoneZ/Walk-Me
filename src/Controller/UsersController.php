@@ -63,13 +63,20 @@ class UsersController extends AppController
      */
     public function add()
     {
+        $this->request->data['lat'] = null;
+        $this->request->data['lng'] = null;
+        $this->request->data['dlat'] = null;
+        $this->request->data['dlng'] = null;
+        $this->request->data['admin'] = 0;
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
+                //var_dump($user);die();
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                //var_dump($user);die();
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
