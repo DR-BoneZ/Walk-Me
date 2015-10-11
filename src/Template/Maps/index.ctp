@@ -34,10 +34,10 @@ $this->layout = 'maps';?>
 				$('#requestModal #titleModal').text('Request a Route');
 				$('#requestModal #formModal').html('Enter Address: <input type="text" id="request"/> ');
 				$.ajax({
-					url: '/WalkMe/maps/request',
+					url: '/WalkMe/maps/req',
 					method: 'POST',
 					data: {
-						id: id,
+						id: datas[id].id,
 						dlat: pos.coords.latitude,
 						dlng: pos.coords.longitude
 					}
@@ -67,10 +67,10 @@ $this->layout = 'maps';?>
 
 			function route() {
 				$.ajax({
-					url: '/WalkMe/maps/request',
+					url: '/WalkMe/maps/req',
 					method: 'POST',
 					data: {
-						id: id,
+						id: datas[id].id,
 						dlat: latLong.Latitude,
 						dlng: latLong.Longitude
 					}
